@@ -1,18 +1,17 @@
 const { Client } = require("@notionhq/client")
+const dotenv = require('dotenv').config()
 
 var express = require('express')
 var server = express()
 
-server.get('/home', async function (request, response) {
-    // console.log(request)
-    console.log(request.query.page)
-
+server.get('/drama', async function (request, response) {
+    console.log(request)
     const notion = new Client({
-        auth: 'secret_lVlC1fCK8kVPwlJqaTZJM3QUSNAygUTtYddPpcRsxac',
+        auth: process.env.NOTION_TOKEN_DRAMA,
     })
     try{
         const myPage = await notion.databases.query({
-            database_id: "9c3c747d981540799c2c17aaf3af15b7",
+            database_id: process.env.NOTION_DATABASE_ID_DRAMA,
             filter: {
                 property: "Score",
                 number: {
